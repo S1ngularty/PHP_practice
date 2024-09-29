@@ -9,6 +9,10 @@ $query="SELECT * FROM user u inner join accounts a on u.user_id=a.user_id
 
 $result=mysqli_query($conn,$query);
 
+
+// gg bro
+
+
  if(mysqli_num_rows($result)>0){
     $row=mysqli_fetch_assoc($result);
     echo $first=$row['first_name'];

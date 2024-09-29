@@ -1,2 +1,2 @@
 # PHP_practice
-For my own skills
+nothing but just a php code
