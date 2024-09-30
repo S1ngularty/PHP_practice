@@ -1,8 +1,11 @@
 <?php
 session_start();
 include ("../includes/config.php");
-$_SESSION['user_id'];
-print_r($_SESSION);
+include ("../structure/header.html");
+try{
+
+if(!empty($_SESSION['user_id'])){
+
 
 $sql1="SELECT * FROM user u inner join accounts a 
 on u.user_id=a.user_id inner join profile p on
@@ -87,6 +90,13 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     header("location:../functions/update.php?file=$file");
     exit;
   }
- 
 
+
+}else{
+  throw new Exception("Please <a href=../index.php>Log In</a> first!");
+}
+
+}catch(Exception $x){
+  print $x->getMessage();
+}
 ?>

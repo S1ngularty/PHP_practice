@@ -3,8 +3,6 @@ session_start();
 include "includes/config.php";
 include "structure/header.html";
 
-($_SESSION);
-
 try{
     if(!empty($_SESSION['user_id'])){
          $id= $_SESSION['user_id'];
@@ -82,7 +80,7 @@ try{
 <div class="options">
     <label for="">Option:</label>
     <button><?php print "<a href='functions/delete.php?id=$id&loc=$file' style='text-decoration:none; color:black;'>delete</a>";?></button>
-    <button><?php print "<a href='functions/edit.php?id=$id' style='text-decoration:none; color:black;'>update</a>";?></button>
+    <button><?php print "<a href='functions/edit.php' style='text-decoration:none; color:black;'>update</a>";?></button>
     <button><?php print "<a href='functions/logout.php' style='text-decoration:none; color:black;'>Log out</a>";?></button>
 </div>
 </body>

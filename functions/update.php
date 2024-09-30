@@ -1,10 +1,10 @@
 <?php
 session_start();
 include "../includes/config.php";
-$id=$_SESSION['user_id'];
-print_r($_SESSION);
 
-if(!empty($_SESSION['user_id'])){
+try{
+  $id=$_SESSION['user_id'];
+  if(!empty($_SESSION['user_id'])){
     $fname=$_POST['firstname'];
     $lname=$_POST['lastname'];
     $age=$_POST['age'];
@@ -70,6 +70,12 @@ filter_input(INPUT_POST,'password',FILTER_VALIDATE_INT) &&
 
 
 
+}else{
+  throw new Exception("Please log in first!");
+}
+
+}catch(Exception $x){
+  print $x->getMessage();
 }
 
 
