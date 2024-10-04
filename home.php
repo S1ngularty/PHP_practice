@@ -35,6 +35,8 @@ try{
     <title>Home</title>
 </head>
 <body style="font-family:Arial,sans-serif;">
+
+<div class="main" style="justify-content:center; display:flex;">
 <div class="container" style="padding: 30px; margin: 20px; border: solid black 1px; height: auto; width: 500px; font-family: Arial, sans-serif;">
     <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post" enctype="multipart/form-data">
 
@@ -44,7 +46,7 @@ try{
         </div>
 
 
-        <div class="container1" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div class="basic_info" style="width: 60%;">
                 <h3>Basic Personal Information</h3>
                 <div class="info" style="padding: 5px;">
@@ -76,13 +78,15 @@ try{
 
     </form>
 </div>
-
+</div>
 <div class="options">
     <label for="">Option:</label>
     <button><?php print "<a href='functions/delete.php?id=$id&loc=$file' style='text-decoration:none; color:black;'>delete</a>";?></button>
     <button><?php print "<a href='functions/edit.php' style='text-decoration:none; color:black;'>update</a>";?></button>
+    <button><?php print "<a href='shop.php' style='text-decoration:none; color:black;'>Go to Shop</a>";?></button>
     <button><?php print "<a href='functions/logout.php' style='text-decoration:none; color:black;'>Log out</a>";?></button>
 </div>
+
 </body>
 </html>
 

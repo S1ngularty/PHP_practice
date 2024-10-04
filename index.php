@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
          $row=mysqli_fetch_assoc($result);
             $_SESSION['user_id']=$row['user_id'];
          $message="Welcome ". strtoupper($row['first_name'])."!";
-         print "<script> alert('{$_SESSION['user_id']}'); window.location.href='home.php'; </script>";
+         print "<script> alert('$message'); window.location.href='home.php'; </script>";
          exit();
          
         }else{
@@ -44,22 +44,26 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <body>
-    <div class="container">
+
+
+    <div class="container" style="justify-content: center; display:flex;">
 <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
 <div class="username">
-    <label for="">Username: </label>
-    <input type="text" name="username" placeholder="user@gmail.com">
+    <label for="" class="form-label">Username: </label><br>
+    <input type="text" name="username" placeholder="user@gmail.com" class="user form-control border border-success-subtle rounded-3" required>
 </div>
+<br>
 
 <div class="password">
 
-<label for="">Password:</label>
-<input type="password" name="password">
+<label for="" class="form-label">Password:</label><br>
+<input type="password" name="password" class="form-control border border-success-subtle" required>
 </div>
-
-<div class="btn">
-    <input type="submit" name="submit" value="submit">
+<br>
+<div class="btn " style="display: flex; justify-content:center;">
+    <input type="submit" name="submit" value="submit" class="btn btn-primary">
 </div>
 
 <div class="create">
@@ -68,6 +72,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 </form>
 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
 
