@@ -5,6 +5,11 @@ include("includes/config.php");
 
 if(!empty($_SESSION['user_id'])){
 echo $_SESSION['user_id'];
+
+$sql1="SELECT * FROM items";
+$result=mysqli_query($conn,$sql1);
+
+
     
 ?>
 
@@ -31,15 +36,19 @@ echo $_SESSION['user_id'];
 <br>
     <div class="container" id="container2">
 <form action=" " class="row g-0" method="get" enctype="multipart/form-data" style="display:flex;">
-<div class="col-sm-4 col-md-3 col-xl-2 text-center border border-primary rounded" style="padding: 5px; margin:5px;"><?php print "<img src>" ?></div>
-<div class="col-sm-4 col-md-3 col-xl-2 text-center border border-primary rounded" style="padding: 5px; margin:5px;"><img src="../user_profile/Shop Items/camera.jpg" class="img img-thumbnail  img-responsive" style="width: 200px; height:200px;"  alt=""><label for="" class="form-label">Camera</label><br><?php print "<input type='submit' class='btn btn-primary' name='item2' value='Add to Cart'>"?></div>
-<div class="col-sm-4 col-md-3 col-xl-2 text-center border border-primary rounded" style="padding: 5px; margin:5px;"><img src="../user_profile/Shop Items/earphones.jpg" class="img img-thumbnail  img-responsive" style="width: 200px; height:200px;"  alt=""><label for="" class="form-label">Earphones</label><br><?php print "<input type='submit' class='btn btn-primary' name='item3' value='Add to Cart'>"?></div>
-<div class="col-sm-4 col-md-3 col-xl-2 text-center border border-primary rounded" style="padding: 5px; margin:5px;"><img src="../user_profile/Shop Items/anchor.jpg" class="img img-thumbnail  img-responsive" style="width: 200px; height:200px;"  alt=""><label for="" class="form-label">Anchor</label><br><?php print "<input type='submit' class='btn btn-primary' name='item4' value='Add to Cart'>"?></div>
-<div class="col-sm-4 col-md-3 col-xl-2 text-center border border-primary rounded" style="padding: 5px; margin:5px;"><img src="../user_profile/Shop Items/randomblocks.jpg" class="img img-thumbnail  img-responsive" style="width: 200px; height:200px;"  alt=""><label for="" class="form-label">Blocks</label><br><?php print "<input type='submit' class='btn btn-primary' name='item5' value='Add to Cart'>"?></div>
+<?php while ($row = mysqli_fetch_assoc($result)){
+print "<div class='col-sm-4 col-md-3 col-xl-2 text-center border border-primary rounded' style='padding:5px; margin:5px;'><img src='../user_profile/Shop_Items/{$row['product_appearance']}' class='img img-thumbnail img-responsive' style='width:200px; height:200px;' alt='{$row['item_name']}'><label for='' class='form-label'>{$row['item_name']}</label><br><input type='submit' class='btn btn-primary' name='{$row['item_id']}' value='Add To Cart'></div> ";
+}
+ ?>
+
 </form>
     </div>
 
-  
+  <div class="container" id="button_home">
+  <form action="home.php">
+    <input type="submit" class="btn btn-primary" value="Go back to Home">
+  </form>
+  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

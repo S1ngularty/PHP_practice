@@ -84,6 +84,7 @@ try{
     <button><?php print "<a href='functions/delete.php?id=$id&loc=$file' style='text-decoration:none; color:black;'>delete</a>";?></button>
     <button><?php print "<a href='functions/edit.php' style='text-decoration:none; color:black;'>update</a>";?></button>
     <button><?php print "<a href='shop.php' style='text-decoration:none; color:black;'>Go to Shop</a>";?></button>
+    <button><?php print "<a href='item_function/create.php' style='text-decoration:none; color:black;'>Add Product</a>";?></button>
     <button><?php print "<a href='functions/logout.php' style='text-decoration:none; color:black;'>Log out</a>";?></button>
 </div>
 

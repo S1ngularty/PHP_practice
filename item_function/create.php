@@ -1,8 +1,8 @@
 <?php 
-
+session_start();
 include("../includes/config.php");
 
-
+if(!empty($_SESSION['user_id'])){
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +40,10 @@ include("../includes/config.php");
 </html>
 
 <?php
+
  if(isset($_POST['add'])){
     header("location:../shop_stocks/create.php");
 exit;
+}
 }
 ?>
