@@ -35,9 +35,9 @@ $result=mysqli_query($conn,$sql1);
 <br>
 <br>
     <div class="container" id="container2">
-<form action=" " class="row g-0" method="get" enctype="multipart/form-data" style="display:flex;">
+<form action="../user_profile/shop_order/purchase.php" class="row g-0" method="post" enctype="multipart/form-data" style="display:flex;">
 <?php while ($row = mysqli_fetch_assoc($result)){
-print "<div class='col-sm-4 col-md-3 col-xl-2 text-center border border-primary rounded' style='padding:5px; margin:5px;'><img src='../user_profile/Shop_Items/{$row['product_appearance']}' class='img img-thumbnail img-responsive' style='width:200px; height:200px;' alt='{$row['item_name']}'><label for='' class='form-label'>{$row['item_name']}</label><br><input type='submit' class='btn btn-primary' name='{$row['item_id']}' value='Add To Cart'></div> ";
+print "<div class='col-sm-4 col-md-3 col-xl-2 text-center border border-primary rounded' style='padding:5px; margin:5px;'><img src='../user_profile/Shop_Items/{$row['product_appearance']}' class='img img-thumbnail img-responsive' style='width:200px; height:200px;' alt='{$row['item_name']}'><label for='' class='form-label'>{$row['item_name']}</label><br><button class='btn btn-primary' name='subbutton' value='{$row['item_id']}'>Add To Cart</div> ";
 }
  ?>
 
@@ -45,7 +45,7 @@ print "<div class='col-sm-4 col-md-3 col-xl-2 text-center border border-primary 
     </div>
 
   <div class="container" id="button_home">
-  <form action="home.php">
+  <form action="home.php" method="post" enctype="multipart/form-data">
     <input type="submit" class="btn btn-primary" value="Go back to Home">
   </form>
   </div>
@@ -55,11 +55,6 @@ print "<div class='col-sm-4 col-md-3 col-xl-2 text-center border border-primary 
 </html>
 
 <?php 
-
-
-
-
-
 }else{
     session_destroy();
     print "Please <a href=index.php>login</a> first!";
