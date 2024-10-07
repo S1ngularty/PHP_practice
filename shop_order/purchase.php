@@ -43,7 +43,8 @@ $row=mysqli_fetch_assoc($result);
         <div class="price" style="width:200px; margin:0%;"><p><?php print "<strong>Stocks: </strong>".$row['quantity']." pcs" ?></p></div>
         <div class="text" style="width:200px; margin:0%;"><p><?php print "<strong>Date Added: </strong>".$row['date_added']?></p></div>
         <div class="text" style="width:200px; margin:0%;"><p><?php print "<strong>Description: </strong>".$row['description']?></p></div>
-     
+        <div class="text" style="width:200px; margin:0%;"><p><?php print "<strong>Rating: </strong>"?>4.0</p></div>
+
     </div>
 </div>
 

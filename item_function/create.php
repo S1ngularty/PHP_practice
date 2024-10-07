@@ -25,6 +25,16 @@ if(!empty($_SESSION['user_id'])){
             <input type="number" name="quantity" required>
         </div>
         <br>
+        <div class="description">
+         <label for="">Description:</label>
+         <textarea name="desc" id="desc"></textarea>
+        </div>
+        <br>
+        <div class="quantity">
+            <label for="">Price:</label><br>
+            <input type="number" name="price" required>
+        </div>
+        <br>
         <div class="image">
             <label for="">Product Appearance</label><br>
             <input type="file" name="file" required >
