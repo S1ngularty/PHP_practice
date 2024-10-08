@@ -10,6 +10,7 @@ if(!empty($_SESSION['user_id'])){
        $quantity= $_POST['quantity'];
        $description=$_POST['desc'];
        $price=$_POST['price'];
+       $rating=$_POST['rating'];
        $img= $_FILES['file'];
        $allow=array('png','jpg','jpeg');
     
@@ -21,7 +22,7 @@ if(!empty($_SESSION['user_id'])){
       $location="../shop_items/$newfile";
     
       mysqli_begin_transaction($conn);
-         $sql1="INSERT INTO items (item_name,description,price,product_appearance, date_added) values ('$item','$description','$price','$newfile',now())";
+         $sql1="INSERT INTO items (item_name,description,price,product_appearance,rating, date_added) values ('$item','$description','$price','$newfile',now())";
        $result1= mysqli_query($conn,$sql1);
         echo "<br>$sql1";
     

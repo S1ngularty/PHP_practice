@@ -10,7 +10,7 @@ $sql1="SELECT * FROM items";
 $result=mysqli_query($conn,$sql1);
 
 
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,8 @@ $result=mysqli_query($conn,$sql1);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
+<div class="container" style="justify-content: center; display:flex; align-items:center;">
+<div class="container" >
         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">options</button>
         <ul class="dropdown-menu" aria-labelledby="dropdown">
             <li class="dropdown-item">school supplies</li>
@@ -32,6 +33,13 @@ $result=mysqli_query($conn,$sql1);
             <li class="dropdown-item">other</li>
         </ul>
     </div>
+    <div class="searchbar">
+      <form action="<?php $_SERVER['PHP_SELF']?>" method="get" enctype="multipart/form-data">
+      <input type="text" class="form-control" name="searchtext">
+      <input type="submit" class="btn btn-primary" name="search" value="search">
+      </form>
+    </div>
+</div>
 <br>
 <br>
     <div class="container" id="container2">

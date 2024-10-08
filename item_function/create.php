@@ -35,6 +35,11 @@ if(!empty($_SESSION['user_id'])){
             <input type="number" name="price" required>
         </div>
         <br>
+        <div class="rating">
+            <label for="">Rating:</label><br>
+            <input type="number" name="rating">
+        </div>
+        <br>
         <div class="image">
             <label for="">Product Appearance</label><br>
             <input type="file" name="file" required >
