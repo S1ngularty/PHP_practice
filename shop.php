@@ -4,12 +4,22 @@ include("structure/shopheader.html");
 include("includes/config.php");
 
 if(!empty($_SESSION['user_id'])){
-echo $_SESSION['user_id'];
+ $_SESSION['user_id'];
 
 $sql1="SELECT * FROM items";
 $result=mysqli_query($conn,$sql1);
 
-
+if(isset($_GET['search'])){
+  $keyword=$_GET['searchtext'];
+   $sql2="SELECT * FROM items WHERE description LIKE '%$keyword%'";
+  $result=mysqli_query($conn,$sql2);
+  $count=mysqli_num_rows($result);
+  if($count == 0){
+ print "$count no item found!";
+  }else{
+  print "$count items found.";
+  }
+}
 
 ?>
 
@@ -33,6 +43,7 @@ $result=mysqli_query($conn,$sql1);
             <li class="dropdown-item">other</li>
         </ul>
     </div>
+  <!-- searh bar -->
     <div class="searchbar">
       <form action="<?php $_SERVER['PHP_SELF']?>" method="get" enctype="multipart/form-data">
       <input type="text" class="form-control" name="searchtext">
