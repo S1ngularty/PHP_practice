@@ -30,7 +30,7 @@ $row=mysqli_fetch_assoc($result);
     <br>
     <br>
     <br>
-<div class="container" id="conatainer1" style="justify-content:start; display:flex; border:solid thin; width:700px; height:500px; padding: 30px;">
+<div class="container" id="conatainer1" style="justify-content:start; display:flex; border:solid thin; width:700px; height:450px; height:auto; padding: 30px; margin:20px;">
     <form action="store.php" method="post" enctype="multipart/form-data">
 <div class="information" style="justify-content: space-between; align-items:center; display:flex;">
     <div class="container" id="img" style="width:400px; justify-content:center; display:flex;">
@@ -41,9 +41,10 @@ $row=mysqli_fetch_assoc($result);
         <label for="" class="form-label"><strong><?php print strtoupper($row['item_name']) ?></strong></label>
         <div class="price" style="width:200px; margin:0%;"><p><?php print "<strong>Price: </strong><i style='color:orange;'>P ".$row['price'].".00</i>" ?></p></div>
         <div class="price" style="width:200px; margin:0%;"><p><?php print "<strong>Stocks: </strong>".$row['quantity']." pcs" ?></p></div>
+        <div class="text" style="width:200px; margin:0%;"><p><?php print "<strong>Rating: </strong>".$row['rating']; ?></p></div>
         <div class="text" style="width:200px; margin:0%;"><p><?php print "<strong>Date Added: </strong>".$row['date_added']?></p></div>
         <div class="text" style="width:200px; margin:0%;"><p><?php print "<strong>Description: </strong>".$row['description']?></p></div>
-        <div class="text" style="width:200px; margin:0%;"><p><?php print "<strong>Rating: </strong>"?>4.0</p></div>
+        
 
     </div>
 </div>

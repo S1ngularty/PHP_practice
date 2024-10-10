@@ -31,7 +31,7 @@ if(isset($_GET['search'])){
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
+<body style="margin-bottom:20px;">
 <div class="container" style="justify-content: center; display:flex; align-items:center;">
 <div class="container" >
         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">options</button>
@@ -43,6 +43,7 @@ if(isset($_GET['search'])){
             <li class="dropdown-item">other</li>
         </ul>
     </div>
+
   <!-- searh bar -->
     <div class="searchbar">
       <form action="<?php $_SERVER['PHP_SELF']?>" method="get" enctype="multipart/form-data">
@@ -53,17 +54,24 @@ if(isset($_GET['search'])){
 </div>
 <br>
 <br>
-    <div class="container" id="container2">
-<form action="../user_profile/shop_order/purchase.php" class="row g-0" method="post" enctype="multipart/form-data" style="display:flex;">
+
+    <div class="container" id="container2" style="display: flex; ">
+
 <?php while ($row = mysqli_fetch_assoc($result)){
-print "<div class='col-sm-4 col-md-3 col-xl-2 text-center border border-primary rounded' style='padding:5px; margin:5px;'><img src='../user_profile/Shop_Items/{$row['product_appearance']}' class='img img-thumbnail img-responsive' style='width:200px; height:200px;' alt='{$row['item_name']}'><label for='' class='form-label'>{$row['item_name']}</label><br><button class='btn btn-primary' name='subbutton' value='{$row['item_id']}'>Add To Cart</div> ";
+
+print "<form action='../user_profile/shop_order/add_to_cart.php'  method='post' enctype='multipart/form-data' >
+<div class=' text-center border border-primary rounded' style='padding:5px; margin:5px;'><input type='hidden' name='product_name' value='{$row['item_name']}'>
+<img src='../user_profile/Shop_Items/{$row['product_appearance']}' class='img img-thumbnail img-responsive' style='width:200px; height:200px;' alt='{$row['item_name']}'>
+<label for='' class='form-label'>{$row['item_name']}</label><br><div style='text-align:start;'><strong>Price: </strong><i style='color:orange;'>P ".$row['price'].".00</i></div><br>
+<div style='text-align:start;'><label>Quantity</label><input type='number' value='1' name='product_quantity' class='form-control' size='2' maxlength='2' style='margin-bottom:5px;'> </div>
+<br><button class='btn btn-primary' name='item_id' value='{$row['item_id']}' style='marigin: bottom 5px;'>Add To Cart</button></div> </form>";
 }
  ?>
 
-</form>
+
     </div>
 
-  <div class="container" id="button_home">
+  <div class="container" id="button_home" >
   <form action="home.php" method="post" enctype="multipart/form-data">
     <input type="submit" class="btn btn-primary" value="Go back to Home">
   </form>
