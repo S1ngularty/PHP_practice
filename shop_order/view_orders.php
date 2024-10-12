@@ -26,31 +26,19 @@ if(!empty($_SESSION['user_id'])){
       print "<td> Price:<i> $item_price</i> </td>";
       $total=($item_price * $item_quantity);
       print "<td>Total:<i> $total</i> </td>";
-      print "<td class='table-$bg_color'><input type='checkbox' name='product_remove[]' value='$item_id'>Remove</td></tr>";
+      print "<td class='table-$bg_color'><button class='btn btn-warning hover-danger' name='product_remove' value='$item_id'>Remove</button></td></tr>";
       }
       
           print "</tbody></table>
-          <input type='submit' name='update_cart' value='update'>
           </form></div>";
 
       }
 
-      if(isset($_POST['update_cart'])){
-        if(isset($_POST['product_remove'])){
-            print "<pre>";
-            print_r($_POST['product_remove']);
-            print "</pre>";
-    
-            if(isset($_POST['product_remove'])){
-            foreach($_POST['product_remove'] as $key => $value){
-                print"$key = $value";
-                unset($_SESSION['cart'][$value]);
-            }
-          
-        }
-    
+        if(!empty($_POST['product_remove'])){
+                unset($_SESSION['cart'][$_POST['product_remove']]);   
+                header("Location: " . $_SERVER['PHP_SELF']);
     }
-     }
+     
       
 }
 ?>
@@ -65,6 +53,14 @@ if(!empty($_SESSION['user_id'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
+<style>
+.hover-danger:hover{
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+</style>
 <body>
     
 

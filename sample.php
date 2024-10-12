@@ -5,11 +5,13 @@ session_start();
  echo $id= $_SESSION['user_id'];
 
 
- $sql1="SELECT * FROM items";
- $result=mysqli_query($conn,$sql1);
-
 if(isset($_POST['btn'])){
-    echo $_POST['product_quantity'];
+    if(!empty($_POST['check'])){
+        print'the checkbox is set<br>'.$_POST['check'];
+    }else{
+        print"the checkbox is not set";
+    }
+  
 }
 ?>
 
@@ -22,7 +24,7 @@ if(isset($_POST['btn'])){
 </head>
 <body>
     <form action="sample.php" method="post">
-    <input type='number'  name='product_quantity' class='form-control' size='2' value="1" maxlength='2'  style='margin-bottom:5px;'><input type='submit' name='btn'>
+    <input type='checkbox'  name='check'  value="del"><input type='submit' name='btn' value="set">
     </form>
 </body>
 </html>

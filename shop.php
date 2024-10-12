@@ -75,9 +75,8 @@ print "<form action='../user_profile/shop_order/add_to_cart.php'  method='post' 
     </div>
 
   <div class="container" id="button_home" >
-  <form action="home.php" method="post" enctype="multipart/form-data">
-    <input type="submit" class="btn btn-primary" value="Go back to Home">
-  </form>
+  <button class="btn btn-primary " onclick="window.location.href='../user_profile/home.php';">Home</button>
+    <button class="btn btn-primary " onclick="window.location.href='../user_profile/shop_order/view_orders.php';">View Cart</button>
   </div>
   
 
