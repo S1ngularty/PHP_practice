@@ -6,7 +6,7 @@ include("includes/config.php");
 if(!empty($_SESSION['user_id'])){
  $_SESSION['user_id'];
 
-$sql1="SELECT * FROM items";
+$sql1="SELECT * FROM items s inner join quantity q using(item_id)";
 $result=mysqli_query($conn,$sql1);
 
 if(isset($_GET['search'])){//search form
@@ -66,7 +66,7 @@ print "<form action='../user_profile/shop_order/add_to_cart.php'  method='post' 
 <div class=' text-center border border-primary rounded' style='padding:5px; margin:5px; width:200px; height:450px;'><input type='hidden' name='product_name' value='{$row['item_name']}'>
 <img src='../user_profile/Shop_Items/{$row['product_appearance']}' class='img img-thumbnail img-responsive' style='width:200px; height:200px;' alt='{$row['item_name']}'><input type='hidden' name='product_price' value='{$row['price']}'>
 <label for='' class='form-label'>{$row['item_name']}</label><br><div style='text-align:start;'><strong>Price: </strong><i style='color:orange;'>P ".$row['price'].".00</i></div><br>
-<div style='text-align:start;'><label>Quantity</label><input type='number' value='1' name='product_quantity' class='form-control' size='2' maxlength='2' style='margin-bottom:5px;'> </div>
+<div style='text-align:start;'><label>Quantity</label><input type='number' value='1' name='product_quantity' class='form-control' size='2' maxlength='2'min='1' max='{$row['quantity']}' style='margin-bottom:5px;'> </div>
 <br><button class='btn btn-primary' name='product_id' value='{$row['item_id']}' style='marigin: bottom 5px;'>Add To Cart</button></div> </form>";
 }
  ?>
