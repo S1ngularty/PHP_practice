@@ -72,7 +72,9 @@ mysqli_query($conn,$sql2);
 }
 
           }
-      }
+
+
+      }//end bracket of the first condition
 
         if(isset($_POST['product_remove'])){
             print "<pre>";

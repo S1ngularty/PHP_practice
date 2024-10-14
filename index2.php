@@ -88,29 +88,37 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous">
 </head>
+<style>
+
+.con2,.con1{
+  margin: 50px;
+}
+
+</style>
 <body>
     <div class="container" style="justify-content:center; display:flex;">
         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]);?>"
-          method="post" enctype="multipart/form-data">
+          method="post" enctype="multipart/form-data" >
  
+        <div class="container" id="main_container" style="display: flex; justify-content:center;">
         <div class="con1">
         <div class="firstname">
-    <label for="">First Name:</label>
-    <input type="text" name="firstname" placeholder="user" required>
+    <label for="" class="form-label">First Name:</label>
+    <input type="text" name="firstname" placeholder="user" class="form-control" required>
   </div>
 <br>
   <div class="lastname">
-<label for="">Last Name:</label>
-<input type="text" name="lastname" required>
+<label for="" class="form-label">Last Name:</label>
+<input type="text" name="lastname" class="form-control" required>
   </div>
 <br>
-  <div class="age">
-    <label for="">Age:</label>
-    <input type="number" name="age" required>
+  <div class="age" >
+    <label for="" class="form-label">Age:</label>
+    <input type="number" name="age" class="form-control" required>
   </div>
 <br>
   <div class="genders">
-    <label for="">Gender:</label>
+    <label for="" class="form-label">Gender:</label>
    <select name="gender" id="genderid">
     <option value="male">Male</option>
     <option value="female">Female</option>
@@ -121,27 +129,27 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <br>
 <div class="con2">
 <div class="username">
-    <label for="">Username:</label>
-    <input type="text" name="username" placeholder="user@example.com" required>
+    <label for="" class="form-label">Username:</label>
+    <input type="text" name="username" placeholder="user@example.com" class="form-control" required>
 </div>
 <br>
 <div class="password">
-    <label for="">Password:</label>
-    <input type="Password" name="password" required >
+    <label for="" class="form-label">Password:</label>
+    <input type="Password" name="password" class="form-control" required >
 </div>
 <br>
 <div class="cpassword">
-    <label for="">Confirm Password:</label>
-    <input type="password" name="cpass" required>
+    <label for="" class="form-label">Confirm Password:</label>
+    <input type="password" name="cpass" class="form-control" required>
 </div>
 <br>
 <div class="img">
-    <label for="">profile: </label>
-    <input type="file" name="file">
+    <label for="" class="form-label">profile: </label>
+    <input type="file" name="file" class="form-control">
 </div>
 <br>
 <div class="btn">
-<input type="submit" value="Create" name="create">
+<input type="submit" value="Create" name="create" class="btn btn-success">
 </div>
 <br>
 <div class="text">
@@ -149,6 +157,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 </div>
 
 </div>
+        </div>
         </form>
     </div>
 
