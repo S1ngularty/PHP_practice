@@ -8,7 +8,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(ctype_alpha($_POST["firstname"])== true &&
       ctype_alpha($_POST["lastname"])== true &&
       filter_input(INPUT_POST,'age',FILTER_VALIDATE_INT) &&
-      filter_input(INPUT_POST,'password',FILTER_VALIDATE_INT) &&
       ($_POST['password']== $_POST['cpass'])
 
       ){
@@ -16,18 +15,18 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       try{
       
         mysqli_begin_transaction($conn);
-        $first =$_POST['firstname'];
-        $last=$_POST['lastname'];
-        $age=$_POST['age'];
-        $gender=$_POST['gender'];
+        $first =trim($_POST['firstname']);
+        $last=trim($_POST['lastname']);
+        $age=trim($_POST['age']);
+        $gender=trim($_POST['gender']);
 
         $sql1="INSERT INTO user (first_name,Last_name,age,gender,date_created)
         values('$first','$last','$age','$gender',now())";
 
         mysqli_query($conn,$sql1);
 
-        $username=$_POST['username'];
-        $password=$_POST['password'];
+        $username=trim($_POST['username']);
+        $password=sha1(trim(($_POST['password'])));
 
         $sql2="INSERT INTO accounts (user_id,username,password) 
         values (last_insert_id(),'$username','$password')";
@@ -77,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 }
 
 ?>
-
+<!--interface-->
 <!DOCTYPE html>
 <html lang="en">
 <head>

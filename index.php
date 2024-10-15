@@ -6,26 +6,36 @@ include("structure/header.html");
 
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-    $username=$_POST["username"];
-    $password=$_POST["password"];
-    if(filter_var($username, FILTER_VALIDATE_EMAIL)
-     && filter_var($password, FILTER_VALIDATE_INT)){
+    $username=trim($_POST["username"]);
+    $password=sha1(trim($_POST["password"]));
+    if(filter_var($username, FILTER_VALIDATE_EMAIL)){
 
      try{
-        $result=  mysqli_query($conn,"SELECT u.first_name, u.user_id FROM
+        $sql1="SELECT u.first_name, u.user_id FROM
         user u inner join accounts a on u.user_id =a.user_id
-        where username='$username' && password='$password' ");
-     
-        if(mysqli_num_rows($result)>0){
-         $row=mysqli_fetch_assoc($result);
-            $_SESSION['user_id']=$row['user_id'];
-         $message="Welcome ". strtoupper($row['first_name'])."!";
-         print "<script> alert('$message'); window.location.href='home.php'; </script>";
-         exit();
+        where username=? && password=? ";
+       $stmt1=mysqli_prepare($conn,$sql1);
+
+       mysqli_stmt_bind_param($stmt1,'ss',$username,$password);
+     mysqli_stmt_execute($stmt1);
+
+     mysqli_stmt_store_result($stmt1);
+     mysqli_stmt_bind_result($stmt1,$first_name,$user_id);
+
+     if(mysqli_stmt_num_rows($stmt1)===1){
+    mysqli_stmt_fetch($stmt1);
+    $_SESSION['user_id']=$user_id;
+header("location:shop.php");
+     }else{
+        throw new Exception("account does not exist");
+     }
+        // if(mysqli_num_rows($result)>0){
+        //  $row=mysqli_fetch_assoc($result);
+        //     $_SESSION['user_id']=$row['user_id'];
+        //  $message="Welcome ". strtoupper($row['first_name'])."!";
+        //  print "<script> alert('$message'); window.location.href='home.php'; </script>";
+        //  exit();
          
-        }else{
-            throw new exception ("Account does not exist!");
-        }
 
      }catch(Exception $e){
       

@@ -6,6 +6,7 @@ include("../includes/config.php");
 if(!empty($_SESSION['user_id'])){
  $purchase_id=$_POST['subbutton'];
     
+//  query
  echo $sql1="SELECT * FROM items i inner join quantity q on i.item_id=q.item_id where i.item_id=$purchase_id";
 $result=mysqli_query($conn,$sql1);
 
