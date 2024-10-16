@@ -19,26 +19,30 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $last=trim($_POST['lastname']);
         $age=trim($_POST['age']);
         $gender=trim($_POST['gender']);
+        $role=trim($_POST['role']);
 
-        $sql1="INSERT INTO user (first_name,Last_name,age,gender,date_created)
-        values('$first','$last','$age','$gender',now())";
+       echo $sql1="INSERT INTO user (first_name,Last_name,age,gender,date_created)
+        values(?,?,?,?,now())";
+        $stmt1=mysqli_prepare($conn,$sql1);
+        mysqli_stmt_bind_param($stmt1,'ssis',$first,$last,$age,$gender);
+        mysqli_stmt_execute($stmt1);
 
-        mysqli_query($conn,$sql1);
+        echo $last_id = mysqli_insert_id($conn);
 
         $username=trim($_POST['username']);
         $password=sha1(trim(($_POST['password'])));
 
-        $sql2="INSERT INTO accounts (user_id,username,password) 
-        values (last_insert_id(),'$username','$password')";
+       echo $sql2="INSERT INTO accounts (user_id,username,password,role) 
+        values (?,?,?,?)";
+     $stmt2=mysqli_prepare($conn,$sql2);
+     mysqli_stmt_bind_param($stmt2,'isss',$last_id,$username,$password,$role);
+     mysqli_stmt_execute( $stmt2);
 
-        mysqli_query($conn,$sql2);
-
-   $last_id=mysqli_insert_id($conn);
 
         $file=$_FILES["file"]["name"];
-        echo $tmp=$_FILES["file"]["tmp_name"];
+         $tmp=$_FILES["file"]["tmp_name"];
         $type=$_FILES["file"]["type"];
-        echo $error=$_FILES["file"]["error"];
+         $error=$_FILES["file"]["error"];
         $allowed=array("png","jpg","jpeg");
 
         $file_ext=explode('.',$file);
@@ -49,8 +53,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
           $location="uploads/".$newfile;
 
          echo $sql3="INSERT INTO profile (user_id,image,date_uploaded)
-        values(last_insert_id(),'$newfile',now())";
-        $result=  mysqli_query($conn,$sql3);
+        values(?,?,now())";
+        $stmt3=mysqli_prepare($conn,$sql3);
+        mysqli_stmt_bind_param($stmt3,'is',$last_id,$newfile);
+        mysqli_stmt_execute($stmt3);
 
         if(mysqli_affected_rows($conn)>0){
           move_uploaded_file($tmp,$location);
@@ -130,6 +136,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <div class="username">
     <label for="" class="form-label">Username:</label>
     <input type="text" name="username" placeholder="user@example.com" class="form-control" required>
+</div>
+<br>
+<div class="role">
+    <label for="" class="form-label">Role:</label>
+   <select name="role" id="role">
+    <option value="admin">Admin</option>
+    <option value="user">User</option>
+   </select>
 </div>
 <br>
 <div class="password">
