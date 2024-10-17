@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(filter_var($username, FILTER_VALIDATE_EMAIL)){
 
      try{
-        $sql1="SELECT u.first_name, u.user_id FROM
+        $sql1="SELECT u.first_name, u.user_id , a.role FROM
         user u inner join accounts a on u.user_id =a.user_id
         where username=? && password=? ";
        $stmt1=mysqli_prepare($conn,$sql1);
@@ -20,12 +20,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
      mysqli_stmt_execute($stmt1);
 
      mysqli_stmt_store_result($stmt1);
-     mysqli_stmt_bind_result($stmt1,$first_name,$user_id);
+     mysqli_stmt_bind_result($stmt1,$first_name,$user_id,$role);
 
      if(mysqli_stmt_num_rows($stmt1)===1){
     mysqli_stmt_fetch($stmt1);
     $_SESSION['user_id']=$user_id;
-header("location:shop.php");
+    $_SESSION['role']=$role;
+if($role=='user'){
+    header("location:shop.php");
+exit;
+}else{
+    header("location:home.php");
+    exit;
+}
+
      }else{
         throw new Exception("account does not exist");
      }

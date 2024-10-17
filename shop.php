@@ -62,7 +62,7 @@ if(isset($_GET['search'])){//search form
 
 <?php while ($row = mysqli_fetch_assoc($result)){
 
-print "<form action='../user_profile/shop_order/add_to_cart.php'  method='post' enctype='multipart/form-data' >
+print "<form action='../user_profile/shop_user/add_to_cart.php'  method='post' enctype='multipart/form-data' >
 <div class=' text-center border border-primary rounded' style='padding:5px; margin:5px; width:200px; height:450px;'><input type='hidden' name='product_name' value='{$row['item_name']}'>
 <img src='../user_profile/Shop_Items/{$row['product_appearance']}' class='img img-thumbnail img-responsive' style='width:200px; height:200px;' alt='{$row['item_name']}'><input type='hidden' name='product_price' value='{$row['price']}'>
 <label for='' class='form-label'>{$row['item_name']}</label><br><div style='text-align:start;'><strong>Price: </strong><i style='color:orange;'>P ".$row['price'].".00</i></div><br>
@@ -76,7 +76,7 @@ print "<form action='../user_profile/shop_order/add_to_cart.php'  method='post' 
 
   <div class="container" id="button_home" >
   <button class="btn btn-primary " onclick="window.location.href='../user_profile/home.php';">Home</button>
-    <button class="btn btn-primary " onclick="window.location.href='../user_profile/shop_order/view_orders.php';">View Cart</button>
+    <button class="btn btn-primary " onclick="window.location.href='../user_profile/shop_user/view_orders.php';">View Cart</button>
   </div>
   
 
