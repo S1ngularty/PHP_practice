@@ -9,9 +9,9 @@ if(isset($_SESSION['user_id']) && isset($_SESSION['role'])=='admin'){
     $result=mysqli_query($conn,$sql);
 
     if(mysqli_affected_rows($conn)>0){
-        print"<div>
+        print"<div style='margin: 50px;'>
         <table width='50%' cellpadding='6' class='table'> 
-        <tr style='text-align:center;'>
+        <tr>
         <th>Customer ID </th>
         <th>First name</th>
         <th>Last name</th>
@@ -22,9 +22,10 @@ if(isset($_SESSION['user_id']) && isset($_SESSION['role'])=='admin'){
         <th>Date Item Placed</th>
 
         </tr>";
-        
+        $c=0;
         while($row= mysqli_fetch_assoc($result)){
-            print "<tr >
+            $bg_color=  ($c++%2==1)? 'primary' : 'info';
+            print "<tr class='table border'>
             <td>{$row['Customer_id']}</td>
             <td>{$row['firstname']}</td>
             <td>{$row['lastname']}</td>

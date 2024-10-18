@@ -22,7 +22,7 @@ if(!empty($_SESSION['user_id'])){
       $location="../shop_items/$newfile";
     
       mysqli_begin_transaction($conn);
-         $sql1="INSERT INTO items (item_name,description,price,product_appearance,rating, date_added) values ('$item','$description','$price','$newfile',$rating,now())";
+         $sql1="INSERT INTO items (item_name,description,price,product_appearance,rating, date_added) values ('$item','$description','$price','$newfile','$rating',now())";
        $result1= mysqli_query($conn,$sql1);
         echo "<br>$sql1";
     
