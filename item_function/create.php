@@ -19,6 +19,7 @@ if(!empty($_SESSION['user_id'])){
         box-shadow:  0 0 10px rgba(0, 0, 0, 0.3);
         width: 1000px;
         padding: 30px;
+        border-radius: 10px;
     }
     form {
   height: 500px;
@@ -62,6 +63,8 @@ if(!empty($_SESSION['user_id'])){
     img{
         margin-bottom:10px;
     }
+
+   
 
 </style>
 <body>
