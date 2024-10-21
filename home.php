@@ -80,24 +80,50 @@ try{
 </div>
 </div>
 <div class="options">
-    <label for="">Option:</label>
-    <button><?php print "<a href='functions/delete.php?id=$id&loc=$file' style='text-decoration:none; color:black;'>Delete</a>";?></button>
-    <button><?php print "<a href='functions/edit.php' style='text-decoration:none; color:black;'>Update Account</a>";?></button>
-   <?php if($_SESSION['role']=='admin'){
-   print "<button><a href='item_function/create.php' style='text-decoration:none; color:black;'>Add Product</a></button>" ;  
-   print "<button><a href='admin_interface/orderline.php' style='text-decoration:none; color:black;'>Orderline</a></button>" ;  
+<form action="home.php" method="post" enctype="multipart/form-data">
+<select name="select" id="select" onchange="this.form.submit();">
+<option value="delete">Delete</a></option>
+<option value="edit">Edit Profile</option>
+<?php if($_SESSION['role']=='admin'){
+   print "<option value='add'>Add Product</option>" ;  
+   print "<option value='orders'>Orderline</option>" ;  
+   print "<option value='item_edit'>Edit Item</option>" ;  
 }else{
-   print "<button> <a href='shop.php' style='text-decoration:none; color:black;'>Go to Shop</a></button>";
+   print "<option value='shop'>Shop</option>";
 }
-   
-   ?>
-    <button><?php print "<a href='functions/logout.php' style='text-decoration:none; color:black;'>Log out</a>";?></button>
+?>
+</select>
+<button><?php print "<a href='functions/logout.php' style='text-decoration:none; color:black;'>Log out</a>";?></button>
+</form>
 </div>
 
 </body>
 </html>
 
 <?php 
+
+if($_SERVER['REQUEST_METHOD']=='POST'){
+    if($_POST['select']=='orders'){
+        header("location:admin_interface/orderline.php");
+        exit;
+    }elseif($_POST['select']=='delete'){
+        header("location:functions/delete.php?id=$id&loc=$file");
+        exit;
+    }elseif($_POST['select']=='edit'){
+        header("location:functions/edit.php");
+        exit;
+    }elseif($_POST['select']=='shop'){
+        header("location:shop.php");
+        exit;
+    }elseif($_POST['select']=='add'){
+        header("location:item_function/create.php");
+        exit;
+    }elseif($_POST['select']=='item_edit'){
+        header("location:item_function/edit.php");
+        exit;
+    }
+}
+
 }
 else{
    throw new Exception("Please log in first! <a href=index.php >Log in</a>");
