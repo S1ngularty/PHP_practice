@@ -2,82 +2,85 @@
 session_start();
 include "../includes/config.php";
 
+$id=$_SESSION['user_id'];
+if(!empty($_SESSION['user_id'])){
+   $fname=trim(ucwords(strtolower($_POST['firstname'])));
+   $lname=trim(ucwords(strtolower($_POST['lastname'])));
+  $age=trim($_POST['age']);
+  $gender=$_POST['gender'];
+  $username=trim($_POST['username']);
+  $password=sha1($_POST['password']);
+  $confirm_pass=sha1($_POST['cpass']);
+   $img= $_FILES['file'];
+   $allow=array('png','jpg','jpeg');
+
+   $file_ext=explode('.',$img['name']);
+   echo $extension=strtolower(end($file_ext));
+
+   if(in_array($extension,$allow))
+
 try{
-  $id=$_SESSION['user_id'];
-  if(!empty($_SESSION['user_id'])){
-    $fname=$_POST['firstname'];
-    $lname=$_POST['lastname'];
-    $age=$_POST['age'];
-    $gender=$_POST['gender'];
-    $username=$_POST['username'];
-    $password=$_POST['password'];
-     $img= $_FILES['file'];
-     $allow=array('png','jpg','jpeg');
+  if(in_array($extension,$allow) && $password==$confirm_pass)  { 
+   $newfile=uniqid('',true).".".$extension;
+   $location="../uploads/".$newfile;
+   $current_file="../uploads/".$_POST['current_file'];
 
-     $file_ext=explode('.',$img['name']);
-     echo $extension=strtolower(end($file_ext));
+    mysqli_begin_transaction($conn);
+    $sql1="UPDATE user SET first_name=?, Last_name=?, age=?,gender=? WHERE user_id=?";
+    $stmt1=mysqli_prepare($conn,$sql1);
+    mysqli_stmt_bind_param($stmt1,'ssisi',$fname,$lname,$age,$gender,$id);
 
+    $sql2="UPDATE accounts  SET  username=?, password=? WHERE user_id=?";
+    $stmt2=mysqli_prepare($conn,$sql2);
+    mysqli_stmt_bind_param($stmt2,'ssi',$username,$password,$id);
 
-if(ctype_alpha($_POST["firstname"])== true &&
-ctype_alpha($_POST["lastname"])== true &&
-filter_input(INPUT_POST,'age',FILTER_VALIDATE_INT) &&
-filter_input(INPUT_POST,'password',FILTER_VALIDATE_INT) &&
-  ($_POST['password']== $_POST['cpass']) && in_array($extension,$allow)){
+    $sql3= "UPDATE profile SET image=?, date_uploaded=now() WHERE user_id=?";
+    $stmt3=mysqli_prepare($conn,$sql3);
+    mysqli_stmt_bind_param($stmt3,'si',$newfile,$id);
 
-      try{
-          mysqli_begin_transaction($conn);
-          $sql1="UPDATE  user set first_name='$fname', 
-          Last_name='$lname',age='$age',gender='$gender' where user_id='$id'";
-          
-          echo "<br>". $sql1;
-          
-          mysqli_query($conn,$sql1);
-          
-          $sql2="UPDATE  accounts SET username='$username', password ='$password'  where user_id='$id'";
-          mysqli_query($conn,$sql2);
-          echo "<br>". $sql2;
-          
-          $newfile=uniqid('',true).".".$extension;
-          $location="../uploads/".$newfile;
+    mysqli_stmt_execute($stmt1);
+    mysqli_stmt_execute($stmt2);
+    mysqli_stmt_execute($stmt3);
 
-          $sql3="UPDATE profile SET image='$newfile', date_uploaded=now()  where user_id='$id'";
-          echo "<br>". $sql3;
-          mysqli_query($conn,$sql3);
-
-          if(mysqli_affected_rows($conn)>0){
-          $path="../uploads/".$_POST['current_file'];
-          
-          if(unlink($path)){
-            move_uploaded_file($img['tmp_name'],$location);
-            mysqli_commit($conn);
-           header("location: ../home.php");
+    if(mysqli_stmt_affected_rows($stmt3)>0){
+      if(file_exists($current_file)){
+        if(unlink($current_file)){
+         if( move_uploaded_file($img['tmp_name'],$location)){
+          print "file uploaded successfully";
+          mysqli_commit($conn);
+          header("location: ../home.php");
           exit;
-
-          }else{
-            throw new Exception("failed to replace the current profile");
-          }
-                    
-          }else{
-            throw new Exception("failed on executing commands");
-          }
-          
-        }catch(Exception $x){
-                  mysqli_rollback($conn);
-                  print "Error: ". $x->getMessage();
-          
+         }else{
+          throw new Exception("file failed to move to uploaded file");
+         }
+        }else{
+          throw new Exception("failed to replace the file");
         }
+      }else{
+        if( move_uploaded_file($img['tmp_name'],$location)){
+          print "file uploaded successfully";
+          mysqli_commit($conn);
+          header("location: ../home.php");
+          exit;
+         }else{
+          throw new Exception("file failed to move to uploaded file");
+         }
+      }
+    }else{
+      throw new Exception("failed to update");
     }
 
 
-
-}else{
-  throw new Exception("Please log in first!");
-}
+  }else{
+    throw new Exception("File type is not valid");
+  }
 
 }catch(Exception $x){
+  mysqli_rollback($conn);
   print $x->getMessage();
 }
 
+}
 
 
 ?>
