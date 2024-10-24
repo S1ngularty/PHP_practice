@@ -2,6 +2,7 @@
 session_start();
 include "includes/config.php";
 include "structure/header.html";
+include "structure/sidebar.html";
 
 try{
     if(!empty($_SESSION['user_id'])){
@@ -34,17 +35,35 @@ try{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
+<style>
+       body {
+            margin: 0;
+            display: flex;
+        }
+        #sidebar {
+            width: 250px; /* Set fixed width for the sidebar */
+            background-color: #343a40;
+            color: white;
+            height: 100vh; /* Full height of the viewport */
+            padding: 20px;
+        }
+        .main {
+            flex-grow: 1; /* Allow main content to grow and fill available space */
+            justify-content: end;
+            display: flex;
+            align-items: center;
+        }
+      
+</style>
 <body style="font-family:Arial,sans-serif;">
 
 <div class="main" style="justify-content:center; display:flex;">
 <div class="container" style="padding: 30px; margin: 20px; border: solid black 1px; height: auto; width: 500px; font-family: Arial, sans-serif;">
     <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method="post" enctype="multipart/form-data">
-
    
         <div style="text-align: center; margin-bottom: 20px;">
             <h2>Personal Resume</h2>
         </div>
-
 
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div class="basic_info" style="width: 60%;">

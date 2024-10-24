@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include("includes/config.php");
+include("includes/framework.html");
 include("structure/header.html");
 
 
@@ -62,11 +63,41 @@ exit;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<body>
+<style>
+.main{
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+    
+}
+
+.container,.logo{
+    height: 400px;
+    width: 700px;
+    margin: 20px;
+    padding: 50px;
+
+}
+
+.logo{
+    justify-content: start;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    
+}
 
 
-    <div class="container" style="justify-content: center; display:flex;">
+
+</style>
+<body style="height: 100vh;">
+  <div class="main">
+    <div class="logo">
+        <h1>Singularity</h1>
+        <p>"One Vision, Infinite Potential."</p>
+    </div>
+  <div class="container" style="justify-content: center; display:flex; ">
 <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
 <div class="username">
     <label for="" class="form-label">Username: </label><br>
@@ -90,12 +121,6 @@ exit;
 </form>
 
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </div>
 </body>
 </html>
-
-<?php
-
-
-?>

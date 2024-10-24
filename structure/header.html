@@ -4,14 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    </head>
+    <style>
+  body{
+            margin: 0%;
+            padding: 0%;
+        }
+    #navbar a{
+    text-decoration: none;
+    color: white;
+}
+#navbar ul{
+    display: flex;
+    justify-content: end;
+    padding-right:100px ;
+    gap: 50px;
+}
+#navbar {
+    padding: 10px 0px;
+    background-color: #333;
+    height: 50px;
+    width: 100%;
+    position: fixed; /* Keep navbar at the top */
+    z-index: 1; /* Ensure it's above other content */
+}
+#navbar li{
+    list-style: none;
+}
+
+#logo{
+    color: white;
+    font-size: 18px;
+   margin-right: auto;
+}
+    </style>
 <body>
-    <br>
-    <H1 style="text-align: center;">Welcome to the Web!</H1>
-    <br>
-    <hr>
-    <br>
-    <br>
+ <nav id="navbar">
+    <ul>
+        <li id="logo"><strong>Singularity</strong></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="shop.php">Shop</a></li>
+        <li><a href="shop_user/view_orders.php">View Cart</a></li>
+        <li><a href="index.php">Login</a></li>
+        <li><a href="../functions/logout.php">Logout</a></li>
+    </ul>
+ </nav>
 
     
 </body>
